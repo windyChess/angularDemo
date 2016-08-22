@@ -1,0 +1,32 @@
+html{
+    font-size: 10px;
+}
+body{
+    font-size: 2.5rem;
+}
+.container{
+    max-width:60%;
+    height: 4rem;
+    background-color:#ddd;
+    padding:100px;
+    font-size:2rem;
+}
+.test{
+    background:green;
+    margin:50px 0;
+}
+/*************一侧定宽的自适应布局*******************/
+.fixed-left{
+    margin-top:2rem;
+}
+.left{
+    float: left;
+    width:26rem;
+    text-align: center;
+}
+.left img{
+    width:20rem;
+}
+.right{
+    margin-left:28rem;
+}
