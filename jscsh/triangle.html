@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三角形</title>
+    <link rel="stylesheet" href="css/triangle.css">
+</head>
+<body>
+    <div class="content">
+        <!--width:0,只有边框的div-->
+        <div class="border-demo"></div>
+
+        <!--向上三角形-->
+        <div class="triangle-top"></div>
+
+        <!--向下三角形-->
+        <div class="triangle-bottom"></div>
+
+        <!--向左三角形-->
+        <div class="triangle-left"></div>
+
+        <!--向右三角形-->
+        <div class="triangle-right"></div>
+    </div>
+
+    <div class="content">
+        <!--带边框的三角形-->
+        <div class="triangle-test1">
+            <span></span>
+        </div>
+
+        <!--test:border:0px 100px 100px-->
+        <!--
+            border:0px 100px 100px ==> 三角形的构成一定要有三个边框？？？
+            【注】：如果修改为border:0px 100px 那么将不存在三角形??
+            解决：border:0px 100px 上下无，左右有值，但是并没有交集，肯定不存在三角形
+        -->
+        <div class="triangle-test">
+            <span></span>
+        </div>
+
+        <!--带边框的三角形-->
+        <div class="triangle-border">
+            <span></span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!--气泡框-->
+        <div class="bubble-border">
+            <span><em></em></span>
+            <p>三角形的构成一定要有三个边框？？？</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="triangle-nw"></div>
+    </div>
+</body>
+</html>
