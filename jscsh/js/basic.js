@@ -3,7 +3,7 @@
  */
 /*label语句使用*/
 //未使用label语句
-/*for(var i=0; i<10; i++){
+ for(var i=0; i<10; i++){
     for(var j=0; j<10; j++){
         if(j == 5 && i == 5){
             console.log('j for--'+j);
@@ -11,10 +11,10 @@
         }
     }
     console.log('i for--'+i);
-}*/
+}
 
 //使用label语句
-start:for(var i=0; i<10; i++){
+/* start:for(var i=0; i<10; i++){
     for(var j=0; j<10; j++){
         if(j == 5 && i == 5){
             console.log('j for--'+j);
@@ -22,4 +22,4 @@ start:for(var i=0; i<10; i++){
         }
     }
     console.log('i for--'+i);
-}
+} */
