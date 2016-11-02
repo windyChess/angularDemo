@@ -8,5 +8,9 @@ basicRoute.config(function($stateProvider,$urlRouterProvider){
     url : '/basic/about.htm',
     templateUrl : 'modules/basic/views/about.html',
     controller : 'aboutCtrl'
+  }).state('user-center',{
+    url : '/basic/user.htm',
+    templateUrl : 'modules/basic/views/userCenter.html',
+    controller : 'userCtrl'
   });
 });

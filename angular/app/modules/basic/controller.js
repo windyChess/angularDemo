@@ -128,19 +128,23 @@ basicController.controller('homeCtrl',['$scope','$state',function($scope,$state)
   map.addOverlay(mySquare);
 
   mySquare.addEventListener('touchstart',function(){
-    var opts = {
+    /*var opts = {
       width : 250,
       height : 100,
       title : 'Hello tiananmen'
     };
-    var elem = '<a ng-click="clickMe()">World</a>';
+    var elem = '<a href="#/basic/about.htm">World</a>';
     var infoWindow = new BMap.InfoWindow(elem,opts);  //创建信息窗口对象
-    map.openInfoWindow(infoWindow,myPoint); //打开信息窗口
+    map.openInfoWindow(infoWindow,myPoint); //打开信息窗口*/
+    var detailTxt = '这里是详情信息';
+    //detailTxt += '<a href="#/basic/about.htm">go to about.html</a>';
+    var detailW = new DetailWindow(myPoint,detailTxt);
+    map.addOverlay(detailW);
 
   });
 
   mySquare.addEventListener('click',function(){
-    var opts = {
+    /*var opts = {
       width : 250,
       height : 100,
       title : 'Hello tiananmen',
@@ -148,7 +152,11 @@ basicController.controller('homeCtrl',['$scope','$state',function($scope,$state)
     };
     var elem = '<a href="#/basic/about.htm">World</a>';
     var infoWindow = new BMap.InfoWindow(elem,opts);  //创建信息窗口对象
-    map.openInfoWindow(infoWindow,myPoint); //打开信息窗口
+    map.openInfoWindow(infoWindow,myPoint); //打开信息窗口*/
+    var detailTxt = '这里是详情信息';
+    var detailW = new DetailWindow(myPoint,detailTxt);
+    map.addOverlay(detailW);
+
   });
 
   //自定义覆盖物(二)
@@ -163,20 +171,40 @@ basicController.controller('homeCtrl',['$scope','$state',function($scope,$state)
     this._div = div;
     div.style.position = "absolute";
     div.style.width = "200px";
-    div.style.border = "1px solid red";
+    div.style.height = "200px";
+    div.style.border = "1px solid blue";
+    div.style.background = "white";
+    var a = document.createElement('a');
+    a.href = '#/basic/about.htm';
+    a.appendChild(document.createTextNode(this._text));
+    /*移动端使用*/
+    a.addEventListener('touchstart',function(){
+      alert('initialize');
+      $state.go('about');
+    });
 
-    map.getPanes().labelPane.appendChild(div);
+    div.appendChild(a);
+
+    map.getPanes().floatPane.appendChild(div);
     return div;
-  }
+  };
   DetailWindow.prototype.draw = function(){
     var map = this._map;
     var position = this._map.pointToOverlayPixel(this._point);
     this._div.style.left = position.x + 'px';
-    this._div.style.top = position.y - 30 + 'px';
-  }
+    this._div.style.top = position.y - 200 + 'px';
+  };
+  DetailWindow.prototype.addEventListener = function(event,fn){
+    this._div['on'+event] = fn;
+  };
+
 
 }]);
 
 basicController.controller('aboutCtrl',['$scope',function($scope){
+
+}]);
+
+basicController.controller('userCtrl',['$scope',function($scope){
 
 }]);
