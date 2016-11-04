@@ -8,3 +8,21 @@ html{
   width:100%;
   border:1px solid red;
 }*/
+.font-white{
+  color:#fff;
+}
+/**********顶部导航栏***********/
+.nav-top-bar>div{
+  height:50px;
+  line-height: 50px;
+}
+.navLeft{
+  border:1px solid red;
+  width:20%;
+  float:left;
+}
+.navRight{
+  border:1px solid green;
+  width:80%;
+  float:left;
+}
