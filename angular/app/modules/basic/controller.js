@@ -205,6 +205,26 @@ basicController.controller('aboutCtrl',['$scope',function($scope){
 
 }]);
 
+//个人中心
 basicController.controller('userCtrl',['$scope',function($scope){
+
+}]);
+
+//底部导航栏
+basicController.controller('navCtrl',['$scope','$state',function($scope,$state){
+  $scope.title = '首页';
+  $scope.goUser = function(){
+    $scope.title = '个人中心';
+    $state.go('user-center');
+  };
+  $scope.goHome = function(){
+    $scope.title = '首页';
+    $state.go('web');
+  }
+
+}]);
+
+//顶部导航栏
+basicController.controller('topCtrl',['$scope',function($scope){
 
 }]);
