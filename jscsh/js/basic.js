@@ -1,6 +1,7 @@
 /**
  * Created by hfq on 2016/8/18.
  */
+'use strict';
 /*label语句使用*/
 //未使用label语句
  for(var i=0; i<10; i++){
