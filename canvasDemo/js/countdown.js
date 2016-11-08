@@ -45,7 +45,7 @@ function update(){
 
     if(nextSecond != second){
         curSecondTime = nextShowTime;
-        
+
     }
 }
 
