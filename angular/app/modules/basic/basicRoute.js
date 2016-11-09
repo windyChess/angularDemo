@@ -12,5 +12,9 @@ basicRoute.config(function($stateProvider,$urlRouterProvider){
     url : '/basic/user.htm',
     templateUrl : 'modules/basic/views/userCenter.html',
     controller : 'userCtrl'
+  }).state('hand-cut',{
+    url : '/basic/handcut.htm',
+    templateUrl : 'modules/basic/views/handCut.html',
+    controller : 'handcutCtrl'
   });
 });

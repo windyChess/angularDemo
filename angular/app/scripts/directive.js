@@ -3,19 +3,22 @@
  */
 var webDir = angular.module('webDir',[]);
 
-webDir.directive('customChange',function(){
+webDir.directive('customChange',function($state){
   return{
     restrict : 'A',
     link: function($scope,elem,attr){
       elem.on('change',function(event){
-        //console.log(10);
         var files = event.target.files;
         var reader = new FileReader;
         reader.readAsDataURL(files[0]);
-        //console.log(reader);
         reader.onload = function(e){
-          $('.preview').attr("src", this.result);
+          //$('.preview').attr("src", this.result);
+          //跳转到裁剪页面
+          localStorage.picture = this.result;
+          $state.go('hand-cut');
         }
+
+
 
 
 

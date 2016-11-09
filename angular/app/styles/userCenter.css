@@ -1,32 +1,78 @@
-.uploader{
-  position:relative;
-  border:1px solid red;
-  background-color: red;
-  border-radius: 4px;
-  color:#fff;
-  width:50%;
-  height:50px;
-  line-height: 50px;
-  font-size:20px;
-  font-weight: bold;
-  text-align: center;
-  margin:20px 100px;
+.user-center{
+  background-color:#F8F8F8;
 }
-.uploader input{
+.head-picture{
+  overflow: hidden;
+  position: relative;
+  border:0;
+  border-bottom:1px solid #ddd;
+  border-radius: 0px !important;
+}
+.head-picture img{
+  width:64px;
+}
+.head-picture span{
+  display: block;
+  height:64px;
+  line-height: 64px;
+}
+.head-picture input{
   position: absolute;
   left:0;
   top:0;
   width:100%;
   opacity:0;
+  height:84px;
 }
 
-.preview-box{
-  border:1px solid green;
+
+/************hand-cut.html****************/
+.handCut{
+  position: relative;
+}
+.opera-area{
+  position:absolute;
+  width:100%;
+  height:50px;
+  background-color: #222;
+  line-height: 50px;
+  font-size:25px;
+  border-color: #080808;
+}
+.opera-area button{
+  margin:8px 10px 0 0;
+}
+.opera-area i{
+  margin-left:10px;
+}
+
+
+.picture{
+  position: relative;
+  top:50px;
+}
+#picture-box{
+  /*border:1px solid red;*/
+  background-color: #000;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+.clip-area{
   width:300px;
   height:300px;
-  margin:30px 50px;
+  border:1px solid #fff;
+  position:absolute;
+  /*top:200px;*/
+  /*left:60px;*/
 }
-.preview{
+
+.picture-mask{
+  position:absolute;
+  top:0;
+  left:0;
+  /*background-color:rgba(0,0,0,0.5);*/
   width:100%;
-  height:100%;
+  border:1px solid #000; /*为什么删除后，遮罩层就不见了*/
 }

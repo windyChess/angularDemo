@@ -1,7 +1,16 @@
 <div ng-include="'modules/basic/views/topNavBar.html'"></div>
-<div class="marginTop">
-  <h1>This is userCenter</h1>
-  <div>
+<div class="marginTop user-center">
+  <ul class="list-group">
+    <li class="list-group-item head-picture">
+      <span class="left">头像</span>
+      <img src="images/lufei.jpg" class="right">
+      <input type="file" custom-change>
+    </li>
+  </ul>
+
+
+
+  <!--<div>
     <button class="uploader">上传图片
       <input type="file"  accept="image/*" custom-change multiple>
     </button>
@@ -9,6 +18,20 @@
     <div class="preview-box">
       <img class="preview">
     </div>
-  </div>
+  </div>-->
 </div>
 <div ng-include="'modules/basic/views/footerBar.html'"></div>
+<script>
+  var winHeight = window.screen.availHeight;
+  var userHeight = winHeight - 102;
+  var wuli = $(document).height();
+  alert('availHeight:'+winHeight + ',userHeight:'+userHeight+',offsetHeight:'
+      +window.document.body.offsetHeight+',document:'+wuli);
+  $('.user-center').css({
+    'height' : (userHeight - 2) + 'px',
+    'border' : '1px solid red'
+  });
+  $(document).css({
+    'border' : '1px solid green'
+  });
+</script>

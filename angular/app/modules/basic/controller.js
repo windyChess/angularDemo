@@ -224,7 +224,30 @@ basicController.controller('navCtrl',['$scope','$state',function($scope,$state){
 
 }]);
 
-//顶部导航栏
-basicController.controller('topCtrl',['$scope',function($scope){
+//图片裁剪预览
+basicController.controller('handcutCtrl',['$scope','$state',function($scope,$state){
+  var canvas = document.getElementById('picture-box');
+  canvas.width = window.screen.availWidth;
+  canvas.height = window.screen.availHeight - 50;
+  var context = canvas.getContext('2d');
+
+  var image = new Image();
+  image.src = localStorage.picture;
+  //image.attr('src',localStorage.picture);
+  var imgW = canvas.width;
+  var imgH = canvas.width*image.height/image.width;
+  context.drawImage(image,50,200,imgW,imgH);
+
+  function changePosition(x,y){
+    context.clearRect(0,0,canvas.width,canvas.height);
+    context.drawImage(image,x,y,imgW,imgH);
+  }
+
+
+  $scope.goBack = function(){
+    $state.go('user-center');
+  }
 
 }]);
+
+

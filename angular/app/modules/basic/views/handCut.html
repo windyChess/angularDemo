@@ -1,0 +1,30 @@
+<div class="handCut">
+  <div class="opera-area font-white">
+    <i class="glyphicon glyphicon-arrow-left" ng-click="goBack()"></i>
+    <button class="btn btn-success right">使用</button>
+  </div>
+  <div class="picture">
+    <canvas id="picture-box">此浏览器不支持canvas,请更换浏览器后再试！</canvas>
+    <div class="picture-mask">
+      <!--<img class="origin-img clip-area" src="images/yeoman.png" alt="">-->
+      <div class="clip-area"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  /*
+  * 遮罩层方法：半透明的是边框，内容区是全透明的
+  * */
+  var sWidth = window.screen.availWidth;
+  var sHeight = window.screen.availHeight;
+  $('.picture-mask').css({
+    'height' : (sHeight - 50) +'px',
+    'border-left-width' : '60px',
+    'border-right-width' : (sWidth - 60 - 300) + 'px',
+    'border-top-width' : '200px',
+    'border-bottom-width' : (sHeight - 200 - 300 - 50) + 'px',
+    'border-color' : 'rgba(0,0,0,0.5)'
+  });
+</script>
