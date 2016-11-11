@@ -3,7 +3,7 @@
     <i class="glyphicon glyphicon-home"></i>
     <span>首页</span>
   </div>
-  <div class="footer-item">
+  <div class="footer-item" ng-click="goSeries()">
     <i class="glyphicon glyphicon-th"></i>
     <span>分类</span>
   </div>
@@ -16,7 +16,4 @@
     <span>个人中心</span>
   </div>
 </nav>
-<script>
-  var test = $('.navbar-fixed-bottom').offset();
-  alert(test.top);
-</script>
+

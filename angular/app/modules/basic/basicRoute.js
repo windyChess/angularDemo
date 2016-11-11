@@ -3,7 +3,7 @@
  */
 var basicRoute = angular.module('basicRoute',['ui.router']);
 
-basicRoute.config(function($stateProvider,$urlRouterProvider){
+basicRoute.config(function($stateProvider){
   $stateProvider.state('about',{
     url : '/basic/about.htm',
     templateUrl : 'modules/basic/views/about.html',
@@ -16,5 +16,9 @@ basicRoute.config(function($stateProvider,$urlRouterProvider){
     url : '/basic/handcut.htm',
     templateUrl : 'modules/basic/views/handCut.html',
     controller : 'handcutCtrl'
+  }).state('series-page',{
+    url : '/basic/series.htm',
+    templateUrl : 'modules/basic/views/series.html',
+    controller : 'seriesCtrl'
   });
 });

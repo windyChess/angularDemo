@@ -1,0 +1,20 @@
+.left-section{
+  width:50%;
+  float:left;
+  overflow: hidden;
+}
+.right-section{
+  overflow: hidden;
+}
+.slide-item{
+  text-align: center;
+  padding:1rem;
+}
+.slide-item img{
+  width:100%;
+}
+
+
+
+
+
