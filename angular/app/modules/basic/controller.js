@@ -66,4 +66,10 @@ basicController.controller('seriesCtrl',['$scope','$state',function($scope,$stat
   $scope.goMap = function(){
     $state.go('map-show');
   }
+  $scope.goloadMore = function(){
+    $state.go('load-more');
+  }
+  $scope.goWe = function(){
+    $state.go('use-we');
+  }
 }]);

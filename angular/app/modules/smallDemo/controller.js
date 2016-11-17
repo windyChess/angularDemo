@@ -14,6 +14,22 @@ smallController.controller('slidingCtrl',['$scope','$state',function($scope,$sta
 
 }]);
 
+smallController.controller('loadmoreCtrl',['$scope','service',function($scope,service){
+  $scope.list = [];
+  $scope.getMoreData = function(){
+    service.getList('../json/list.json').success(function(response){
+      $scope.list = $scope.list.concat(response);
+    });
+  }
+
+  $scope.getMoreData();
+}]);
+
+smallController.controller('weCtrl',['$scope',function($scope){
+
+}]);
+
+
 smallController.controller('mapCtrl',['$scope','$state',function($scope,$state){
   /**************百度地图*******************/
   var map = new BMap.Map("container"); //创建地图实例

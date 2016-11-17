@@ -9,8 +9,16 @@ demoRoute.config(function($stateProvider){
     templateUrl : 'modules/smallDemo/views/sliding.html',
     controller : 'slidingCtrl'
   }).state('map-show',{
-    url : '/smallDemo/map.html',
+    url : '/smallDemo/map.htm',
     templateUrl : 'modules/smallDemo/views/map.html',
     controller : 'mapCtrl'
+  }).state('load-more',{
+    url : '/smallDemo/loadMore.htm',
+    templateUrl : 'modules/smallDemo/views/loadMore.html',
+    controller : 'loadmoreCtrl'
+  }).state('use-we',{
+    url : '/smallDemo/useWe.htm',
+    templateUrl : 'modules/smallDemo/views/useWe.html',
+    controller : 'weCtrl'
   });
 });
