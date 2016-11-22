@@ -45,3 +45,12 @@ webDir.directive('customChange',function($state){
     }
   }
 });
+
+webDir.directive('loadMore',function(){
+  return {
+    restrict : 'A',
+    link : function($scope,elem,attr){
+
+    }
+  }
+});
