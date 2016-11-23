@@ -10,3 +10,4 @@ Run `grunt` for building and `grunt serve` for preview.
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
+![image](https://github.com/windyChess/angularDemo/blob/master/angular/app/images/refresh.png)
