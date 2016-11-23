@@ -1,0 +1,22 @@
+.svg-first{
+  text-align: center;
+  border:1px solid red;
+  width:110px;
+  float:left;
+}
+.svg-second{
+  border:1px solid red;
+  width:200px;
+  height:200px;
+  background: url(../images/svg/smile.svg);
+  float:left;
+  text-align: center;
+}
+.svg-three{
+  border:1px solid red;
+  float:left;
+}
+.base-draw{
+  border:1px solid red;
+  float:left;
+}

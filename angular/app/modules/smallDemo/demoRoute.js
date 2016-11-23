@@ -20,5 +20,9 @@ demoRoute.config(function($stateProvider){
     url : '/smallDemo/useWe.htm',
     templateUrl : 'modules/smallDemo/views/useWe.html',
     controller : 'weCtrl'
+  }).state('svg-test',{
+    url : '/smallDemo/svg.htm',
+    templateUrl : 'modules/smallDemo/views/svg.html',
+    controller : 'svgCtrl'
   });
 });

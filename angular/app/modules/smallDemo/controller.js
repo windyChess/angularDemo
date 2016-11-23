@@ -29,6 +29,10 @@ smallController.controller('weCtrl',['$scope',function($scope){
 
 }]);
 
+smallController.controller('svgCtrl',['$scope',function($scope){
+
+}]);
+
 
 smallController.controller('mapCtrl',['$scope','$state',function($scope,$state){
   /**************百度地图*******************/

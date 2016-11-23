@@ -24,8 +24,8 @@ basicController.controller('navCtrl',['$scope','$state',function($scope,$state){
     $state.go('user-center');
   };
   $scope.goHome = function(){
-    $scope.title = '首页';
-    $state.go('web');
+      $scope.title = '首页';
+      $state.go('web');
   };
   $scope.goSeries = function(){
     $state.go('series-page');
@@ -71,5 +71,8 @@ basicController.controller('seriesCtrl',['$scope','$state',function($scope,$stat
   }
   $scope.goWe = function(){
     $state.go('use-we');
+  }
+  $scope.goSvg = function(){
+    $state.go('svg-test');
   }
 }]);
