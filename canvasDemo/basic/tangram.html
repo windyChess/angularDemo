@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>七巧板</title>
+    <style>
+        #canvas{
+            display: block;
+            margin:50px auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas">
+        该浏览器不支持canvas，请更换浏览器后再重试
+    </canvas>
+
+    <script>
+        var tangramParam = [
+            {coordinate:[{x:0,y:0},{x:0,y:800},{x:400,y:400}],color:'#66BDCF'},
+            {coordinate:[{x:0,y:0},{x:400,y:400},{x:800,y:0}],color:'#CEFE68'},
+            {coordinate:[{x:600,y:200},{x:600,y:600},{x:800,y:400},{x:800,y:0}],color:'#F13C64'},
+            {coordinate:[{x:400,y:400},{x:600,y:600},{x:600,y:200}],color:'#FAF61C'},
+            {coordinate:[{x:200,y:600},{x:400,y:800},{x:600,y:600},{x:400,y:400}],color:'#A793C3'},
+            {coordinate:[{x:0,y:800},{x:400,y:800},{x:200,y:600}],color:'#F78ECE'},
+            {coordinate:[{x:400,y:800},{x:800,y:800},{x:800,y:400}],color:'#F7C928'}
+        ];
+
+        var canvas = document.getElementById('canvas');
+        canvas.width = 800;
+        canvas.height = 800;
+        var context = canvas.getContext('2d');
+
+        for(var j = 0;j < tangramParam.length; j++){
+            draw(tangramParam[j].coordinate,tangramParam[j].color,context);
+        }
+
+        function draw(position,color,cxt){
+            cxt.beginPath();
+            cxt.moveTo(position[0].x,position[0].y);
+            for(var i = 1;i < position.length; i++){
+                cxt.lineTo(position[i].x,position[i].y);
+            }
+            cxt.closePath();
+            cxt.fillStyle = color;
+            cxt.fill();
+        }
+    </script>
+</body>
+</html>

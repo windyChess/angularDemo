@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>绘制星星</title>
+	<style>
+		#canvas{
+			border:1px solid pink;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas">
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		canvas.width = 800;
+		canvas.height = 800;
+
+		var context = canvas.getContext('2d');
+
+		context.fillStyle = '#000';
+		context.fillRect(0,0,canvas.width,canvas.height);
+
+		context.lineWidth = 10;
+		context.lineJoin = 'round';
+
+		for(var i = 0; i < 150; i++){
+			var r = Math.random()*10 + 10;
+			var x = Math.random() * canvas.width;
+			var y = Math.random() * canvas.height;
+			var deg = Math.random() * 360;
+			drawStar(context,r/2,r,x,y,deg);
+		}
+
+		
+		//绘制星星
+		function drawStar(cxt,r,R,x,y,rot){
+			cxt.beginPath();
+
+			for(var i=0;i<5;i++){
+				cxt.lineTo(Math.cos((18 + 72 * i - rot) * Math.PI / 180) * R + x,
+								-Math.sin((18 + 72 * i - rot) * Math.PI / 180) * R + y);
+				cxt.lineTo(Math.cos((54 + 72 *i - rot) * Math.PI / 180) * r + x,
+								-Math.sin((54 + 72 * i - rot) * Math.PI / 180) * r + y);
+			}
+			cxt.closePath();
+
+			cxt.lineWidth = 3;
+			cxt.fillStyle = '#fb3';
+			cxt.strokeStyle = '#fd5';
+			cxt.lineJoin = 'round';
+
+			cxt.fill();
+			cxt.stroke();
+		}
+
+	</script>
+</body>
+</html>

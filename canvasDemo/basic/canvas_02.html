@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <style>
+        #canvas{
+            display: block;
+            margin:50px auto;
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas">
+        当前浏览器不支持canvas，请更换浏览器后再试
+    </canvas>
+
+    <script>
+        var canvas = document.getElementById('canvas');
+        canvas.width = 1024;
+        canvas.height = 800;
+
+        var context = canvas.getContext('2d');
+
+        context.lineWidth = 5;
+        context.strokeStyle = '#66BDCF';
+        context.arc(150,100,100,0,1*Math.PI);
+        context.stroke();
+        /*
+        * context.beginPath():重新开始路径
+        * context.closePath()：结束当前路径，如果当前的路径没有封闭的话，会自动封闭
+        *  closePath()对fill()没有用
+        * */
+        for(var i = 0; i < 10; i++){
+            context.beginPath();
+            context.arc(50 + i*100,300,40,0,2*Math.PI*(i+1)/10);
+            context.closePath();
+            context.stroke();
+        }
+
+        for(var i = 0; i < 10; i++){
+            context.beginPath();
+            context.arc(50 + i*100,400,40,0,2*Math.PI*(i+1)/10);
+//            context.closePath();
+            context.stroke();
+        }
+
+        for(var i = 0; i < 10; i++){
+            context.beginPath();
+            context.arc(50 + i*100,500,40,0,2*Math.PI*(i+1)/10,true);
+//            context.closePath();
+            context.stroke();
+        }
+        context.fillStyle = '#F78ECE';
+        for(var i = 0; i < 10; i++){
+            context.beginPath();
+            context.arc(50 + i*100,600,40,0,2*Math.PI*(i+1)/10);
+//            context.closePath();
+            context.fill();
+        }
+    </script>
+</body>
+</html>

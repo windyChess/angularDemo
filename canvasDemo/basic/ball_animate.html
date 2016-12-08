@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小球运动</title>
+    <style>
+        #canvas{
+            border:1px solid red;
+            display: block;
+            margin:50px auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas">
+        此浏览器不支持canvas,请更换浏览器后再试！
+    </canvas>
+
+    <script>
+        var ball = {x:900,y:100,r:10,a:4,vx:-5,vy:-40,color:'#66BDCF'};
+
+        window.onload = function(){
+            var canvas = document.getElementById('canvas');
+            canvas.width = 1000;
+            canvas.height = 800;
+
+            var context = canvas.getContext('2d');
+
+            setInterval(function(){
+                render(context);
+                update(context);
+            },65)
+        }
+
+        function render(cxt){
+            cxt.clearRect(0,0,cxt.canvas.width,cxt.canvas.height);
+
+            cxt.beginPath();
+            cxt.arc(ball.x,ball.y,ball.r,0,2*Math.PI);
+            cxt.closePath();
+            cxt.fill();
+        }
+
+        function update(cxt){
+            ball.x += ball.vx;
+            ball.y += (ball.vy + 0.5*ball.a);
+            ball.vy = ball.vy + ball.a;
+            //小球下落到底部，进行反弹
+            if(ball.y >= (cxt.canvas.height - ball.r)){
+                ball.y = cxt.canvas.height - ball.r;
+                ball.vy = -ball.vy + ball.a;
+                console.log(ball.vy);
+            }
+            //小球弹到左边时，进行反弹
+            if(ball.x <= ball.r){
+                ball.x = ball.r;
+                ball.vx = -ball.vx;
+            }
+            //小球弹到右边时，进行反弹
+            if(ball.x >= (cxt.canvas.width - ball.r)){
+                ball.x = cxt.canvas.width - ball.r;
+                ball.vx = -ball.vx;
+            }
+            //小球弹到上边，进行反弹
+            if(ball.y <= ball.r){
+                ball.y = ball.r;
+                ball.vy = -ball.vy + ball.a;
+            }
+
+        }
+    </script>
+</body>
+</html>

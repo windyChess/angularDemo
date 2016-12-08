@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #canvas{
+            border:1px solid #ccc;
+            display: block;
+            margin:50px auto;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        canvas不指定大小时，默认是300*150
+        css设置的大小=》指定的是画布的大小，不包括内里的大小
+        建议使用width="1024" height="800"
+    -->
+    <canvas id="canvas" width="1024" height="800">
+        <!--如果浏览器不支持canvas，会显示该文本，否则，忽视-->
+        当前浏览器不支持canvas，请更换浏览器后再试
+    </canvas>
+
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById('canvas');
+            /*canvas.width = 1024;
+            canvas.height = 800;*/
+
+            var context = canvas.getContext('2d');
+           /* //浏览器兼容性判断
+            if(canvas.getContext('2d')){
+                var context = canvas.getContext('2d');
+            }else{
+                alert('当前浏览器不支持canvas，请更换浏览器后再试');
+            }*/
+            //【重点】canvas是基于状态绘制的
+            //状态设置
+            context.beginPath();
+            context.moveTo(100,100);
+            context.lineTo(700,700);
+            context.lineTo(100,700);
+            context.lineTo(100,100);
+            context.closePath();
+            context.lineWidth = 5;
+            context.strokeStyle = 'red';
+
+            //填充
+            context.fillStyle = 'rgb(2,100,30)';
+            context.fill();
+
+            //绘制
+            context.stroke();
+
+            context.beginPath();
+            context.moveTo(200,100);
+            context.lineTo(800,700);
+            context.closePath();
+            context.strokeStyle = 'blue';
+            context.stroke();
+        }
+    </script>
+</body>
+</html>

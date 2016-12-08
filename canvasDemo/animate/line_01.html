@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>一条直线</title>
+	<style>
+		#canvas{
+			border: 1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas">
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		canvas.width = 800;
+		canvas.height = 800;
+
+		var cxt = canvas.getContext('2d');
+		/*
+			moveTo: 重新开始绘制，但是设置的状态将被覆盖，使用最后的状态
+			beginPath:重新开始绘制，使用的是当前设置的状态
+			closePath
+			总结：设置的状态是共用的
+		*/
+		cxt.lineWidth = 30;
+
+		cxt.beginPath();
+		cxt.moveTo(50,100);
+		cxt.lineTo(300,400);
+		cxt.lineTo(50,700);
+		cxt.lineCap = 'butt';
+		cxt.strokeStyle = 'green';
+		cxt.stroke();
+
+		cxt.beginPath();
+		cxt.moveTo(150,100);
+		cxt.lineTo(400,400);
+		cxt.lineTo(150,700);
+		cxt.lineCap = 'round';
+		cxt.strokeStyle = 'red';
+		cxt.stroke();
+
+		cxt.beginPath();
+		cxt.moveTo(250,100);
+		cxt.lineTo(500,400);
+		cxt.lineTo(250,700);
+		cxt.lineCap = 'square';
+		cxt.stroke();
+
+		drawRec(cxt,400,50,300,200);
+
+		function drawRec(cxt,x,y,width,height){
+			cxt.beginPath();
+			cxt.moveTo(x,y);
+			cxt.lineTo(x + width,y);
+			cxt.lineTo(x + width,y + height);
+			cxt.lineTo(x,y + height);
+			cxt.closePath();
+
+			cxt.lineWidth = 10;
+			cxt.fillStyle = 'pink';
+			cxt.strokeStyle = 'green';
+
+			cxt.fill();
+			cxt.stroke();
+		}
+	</script>
+</body>
+</html>
