@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>scale</title>
+	<style>
+		#canvas{
+			border:1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas">
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		canvas.width = 500;
+		canvas.height = 500;
+
+		var context = canvas.getContext('2d');
+
+		// context.lineWidth = 5;
+		context.save();
+		context.scale(1,1);
+		/*
+			scale：缩放的是设置的所有属性，
+			如果起始点不是(0,0),那么很明显就可以看出来
+		*/
+		context.strokeRect(10,10,200,200);
+		context.restore();
+
+		context.save();
+		context.scale(1.5,1.5);
+		context.strokeRect(10,10,200,200);
+		context.restore();
+
+		context.save();
+		context.scale(2,2);
+		context.strokeRect(10,10,200,200);
+		context.restore();
+
+	</script>
+</body>
+</html>

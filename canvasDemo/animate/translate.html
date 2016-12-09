@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>translate</title>
+	<style>
+		#canvas{
+			border:1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas">
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		canvas.width = 500;
+		canvas.height = 500;
+
+		var context = canvas.getContext('2d');
+
+		/*
+			translate:移动的是context，也就是原点移动了。
+		*/
+		context.fillStyle = 'green';
+		context.save(); //保存当前的状态
+		context.translate(100,100);
+		context.fillStyle = 'pink';
+		context.fillRect(0,0,200,200);
+		context.restore();//恢复到保存的状态
+
+		context.save();
+		context.translate(300,300);
+		// context.fillStyle = 'pink';
+		context.fillRect(0,0,200,200);
+		context.restore();
+
+	</script>
+</body>
+</html>
