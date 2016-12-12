@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弯月</title>
+	<style>
+		#canvas{
+			border:1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<canvas id='canvas'>
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		canvas.width = 1200;
+		canvas.height = 900;
+
+		var context = canvas.getContext('2d');
+		drawMoon(context,400,400,30,2,200,'yellow');
+		
+
+		function drawMoon(cxt,x,y,rot,d,R,color){
+			cxt.save();
+			cxt.translate(x,y);
+			cxt.rotate(rot*Math.PI/180);
+			cxt.scale(R,R);
+			pathMoon(cxt,d);
+			cxt.restore();
+			
+			context.fillStyle = color || '#fb5';
+			context.fill();
+		}
+
+		function pathMoon(cxt,d){
+			var temp = calcDictance(0,-1,d,0);
+			var r = temp/d;
+
+			cxt.beginPath();
+			cxt.arc(0,0,1,Math.PI/2,3*Math.PI/2,true);
+			cxt.moveTo(0,-1);
+			cxt.arcTo(d,0,0,1,r);
+		}
+
+		function calcDictance(x1,y1,x2,y2){
+			var tmp = Math.pow(x1-x2,2) + Math.pow(y1-y2,2);
+			return Math.sqrt(tmp);
+		}
+	</script>
+</body>
+</html>

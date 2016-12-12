@@ -15,28 +15,55 @@
 	</canvas>
 
 	<script>
-		var canvas = document.getElementById('canvas');
-		canvas.width = 1200;
-		canvas.height = 800;
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			canvas.width = 1200;
+			canvas.height = 800;
 
-		var context = canvas.getContext('2d');
+			var context = canvas.getContext('2d');
 
-		var linearGrad = context.createLinearGradient(0,0,0,canvas.height);
-		linearGrad.addColorStop(0,'#000');
-		linearGrad.addColorStop(1,'#035');
-		context.fillStyle = linearGrad;
-		context.fillRect(0,0,canvas.width,canvas.height);
+			var linearGrad = context.createLinearGradient(0,0,0,canvas.height);
+			linearGrad.addColorStop(0,'#000');
+			linearGrad.addColorStop(1,'#035');
+			context.fillStyle = linearGrad;
+			context.fillRect(0,0,canvas.width,canvas.height);
 
-		context.lineWidth = 10;
-		context.lineJoin = 'round';
+			context.lineWidth = 10;
+			context.lineJoin = 'round';
 
-		for(var i = 0; i < 150; i++){
-			var r = Math.random()*5 + 5;
-			var x = Math.random() * canvas.width;
-			var y = Math.random() * canvas.height * 0.65;
-			var deg = Math.random() * 360;
-			drawStar(context,r,x,y,deg);
+			for(var i = 0; i < 150; i++){
+				var r = Math.random()*5 + 5;
+				var x = Math.random() * canvas.width;
+				var y = Math.random() * canvas.height * 0.65;
+				var deg = Math.random() * 360;
+				drawStar(context,r,x,y,deg);
+			}
+
+			drawMoon(context,600,200,30,2,100,'yellow');
+
+			drawLand(context);
 		}
+
+
+		function drawLand(cxt){
+			cxt.save();
+			cxt.beginPath();
+			cxt.moveTo(0,600);
+			cxt.bezierCurveTo(540,400,660,800,1200,600);
+			cxt.lineTo(1200,800);
+			cxt.lineTo(0,800);
+			cxt.closePath();
+
+			var landStyle = cxt.createLinearGradient(0,800,0,0);
+			landStyle.addColorStop(0,'#030');
+			landStyle.addColorStop(1,'#580');
+			cxt.fillStyle = landStyle;
+
+			cxt.fill();
+			
+			cxt.restore();
+		}
+
 
 		
 		//绘制星星
@@ -69,6 +96,34 @@
 								-Math.sin((54 + 72 * i) * Math.PI / 180) * 0.5);
 			}
 			cxt.closePath();
+		}
+
+		//绘制月亮
+		function drawMoon(cxt,x,y,rot,d,R,color){
+			cxt.save();
+			cxt.translate(x,y);
+			cxt.rotate(rot*Math.PI/180);
+			cxt.scale(R,R);
+			pathMoon(cxt,d);
+			cxt.restore();
+			
+			cxt.fillStyle = color || '#fb5';
+			cxt.fill();
+		}
+
+		function pathMoon(cxt,d){
+			var temp = calcDictance(0,-1,d,0);
+			var r = temp/d;
+
+			cxt.beginPath();
+			cxt.arc(0,0,1,Math.PI/2,3*Math.PI/2,true);
+			cxt.moveTo(0,-1);
+			cxt.arcTo(d,0,0,1,r);
+		}
+
+		function calcDictance(x1,y1,x2,y2){
+			var tmp = Math.pow(x1-x2,2) + Math.pow(y1-y2,2);
+			return Math.sqrt(tmp);
 		}
 
 	</script>

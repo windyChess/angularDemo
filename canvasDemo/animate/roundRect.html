@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>圆角矩形</title>
+	<style>
+		#canvas{
+			border: 1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas">
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		canvas.width = 800;
+		canvas.height = 800;
+
+		var context = canvas.getContext('2d');
+
+		context.save();
+		context.translate(100,100);
+		
+		strokeRoundRect(context,300,200,50,'pink');
+		context.restore();
+
+		context.save();
+		context.translate(100,450);
+		fillRoundRect(context,300,200,50,'pink')
+		context.restore();
+
+		function strokeRoundRect(cxt,w,h,r,color){
+			pathRoundRect(cxt,w,h,r);
+			context.strokeStyle = color;
+			context.stroke();
+		}
+
+		function fillRoundRect(cxt,w,h,r,color){
+			pathRoundRect(cxt,w,h,r);
+			context.fillStyle = color;
+			context.fill();
+		}
+
+		function pathRoundRect(cxt,w,h,r){
+			cxt.beginPath();
+			cxt.arc(r,r,r,Math.PI,3*Math.PI/2);
+			cxt.lineTo(r,0);
+			cxt.lineTo(r+w,0);
+			cxt.arc(w+r,r,r,3*Math.PI/2,2*Math.PI);
+			cxt.lineTo(2*r+w,r);
+			cxt.lineTo(2*r+w,h+r);
+			cxt.arc(w+r,h+r,r,0,Math.PI/2);
+			cxt.lineTo(r+w,2*r+h);
+			cxt.lineTo(r,2*r+h);
+			cxt.arc(r,r+h,r,Math.PI/2,Math.PI);
+			cxt.closePath();
+		}
+
+
+	</script>
+</body>
+</html>
