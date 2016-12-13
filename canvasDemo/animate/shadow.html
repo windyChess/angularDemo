@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>shadow</title>
+	<style>
+		#canvas{
+			border:1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas">
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		canvas.width = 800;
+		canvas.height = 800;
+
+		var context = canvas.getContext('2d');
+
+		context.font = 'bold 100px Arial';
+		context.textAlign = 'center';
+		context.fillStyle = '#058';
+
+		context.shadowColor = 'grey';
+		context.shadowOffsetX = 3;
+		context.shadowOffsetY = 3;
+		context.shadowBlur = 5;
+
+		context.fillText('Hello World!',400,200);
+
+
+	</script>
+</body>
+</html>

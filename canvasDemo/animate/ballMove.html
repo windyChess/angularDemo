@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>小球运动</title>
+	<style>
+		#canvas{
+			border:1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<canvas id='canvas'>
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var ball = null;
+		var balls = [];
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			canvas.width = 800;
+			canvas.height = 800;
+
+			
+
+			var context = canvas.getContext('2d');
+
+			context.globalAlpha = 0.7;
+			for(var i = 0; i < 20;i++){
+				var ball = {
+					x : Math.random() * canvas.width,
+					y : Math.random() * canvas.height,
+					radius : Math.random() * 50 + 50,
+					r : Math.floor(Math.random() * 255),
+					g : Math.floor(Math.random() * 255),
+					b : Math.floor(Math.random() * 255),
+					aX : Math.random() * 5 + 5,
+					aY : Math.random() * 10 + 10
+				};
+				balls.push(ball);
+				drawBall(context,ball);
+			}
+
+			setInterval(function(){
+				render(context);
+				update(canvas.width,canvas.height);
+			},50);
+			
+		}
+
+		
+		//渲染
+		function render(cxt){
+			var cvs = cxt.canvas;
+			cxt.clearRect(0,0,cvs.width,cvs.height);
+			for(var i=0;i<balls.length;i++){
+				cxt.beginPath();
+				cxt.fillStyle = 'rgb('+balls[i].r+','+balls[i].g+','+balls[i].b+')';
+				cxt.arc(balls[i].x,balls[i].y,balls[i].radius,0,2*Math.PI);
+				cxt.closePath();
+				cxt.fill();
+			}
+		}
+
+		//更新小球位置
+		function update(cWidth,cHeight){
+			for(var i = 0;i < balls.length;i++){
+				balls[i].x += balls[i].aX;
+				balls[i].y += balls[i].aY;
+				//小球碰到底部
+				if(balls[i].y >= (cHeight - balls[i].radius) && balls[i].aY > 0){
+					balls[i].aY = - balls[i].aY;
+				}
+				//小球碰到顶部
+				if(balls[i].y <= balls[i].radius && balls[i].aY < 0){
+					balls[i].aY = - balls[i].aY;
+				}
+				//小球碰到左边
+				if(balls[i].x <= balls[i].radius && balls[i].aX < 0){
+					balls[i].aX = -balls[i].aX;
+				}
+				//小球碰到右边
+				if(balls[i].x >= (cWidth - balls[i].radius) && balls[i].aX > 0){
+					balls[i].aX = - balls[i].aX;
+				}
+			}
+		}
+
+
+		//绘制小球
+		function drawBall(cxt,ball){
+			cxt. fillStyle = 'rgb('+ball.r+','+ball.g+','+ball.b+')';
+			cxt.beginPath();
+			cxt.arc(ball.x,ball.y,ball.radius,0,2*Math.PI);
+			cxt.closePath();
+			cxt.fill();
+		}
+
+	</script>
+</body>
+</html>

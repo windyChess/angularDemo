@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>剪切区</title>
+	<style>
+		#canvas{
+			border:1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<canvas id='canvas'>
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var ball = null;
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			canvas.width = 800;
+			canvas.height = 800;
+
+			var context = canvas.getContext('2d');
+
+			ball = {
+				x : Math.random() * canvas.width,
+				y : Math.random() * canvas.height,
+				vx : Math.random() * 5 + 5,
+				vy : Math.random() * 10 +10
+			};
+
+			setInterval(function(){
+				render(context);
+				update(canvas.width,canvas.height);
+			},50)
+		}
+
+		function render(cxt){
+			var cvs = cxt.canvas;
+			cxt.clearRect(0,0,cvs.width,cvs.height);
+
+			cxt.save();
+
+			cxt.beginPath();
+			cxt.arc(ball.x,ball.y,100,0,2*Math.PI);
+			cxt.clip();
+
+			cxt.beginPath();
+			//添加图片
+			var imgTest = new Image();
+			imgTest.src = '../img/cat.jpg';
+			cxt.drawImage(imgTest,0,0);
+
+			cxt.restore();
+		}
+
+		function update(cWidth,cHeight){
+			ball.x += ball.vx;
+			ball.y += ball.vy;
+			//底部
+			if(ball.y >= (cWidth - 100) && ball.vy > 0){
+				ball.vy = -ball.vy;
+			}
+			//顶部
+			if(ball.y <= 100 && ball.vy < 0){
+				ball.vy = -ball.vy;
+			}
+			//左部
+			if(ball.x <100 && ball.vx < 0){
+				ball.vx = - ball.vx;
+			}
+			//右部
+			if(ball.x > (cHeight -100) && ball.vx > 0){
+				ball.vx = - ball.vx;
+			}
+		}
+
+
+	</script>
+</body>
+</html>

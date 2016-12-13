@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>clip 剪切区域</title>
+	<style>
+		#canvas{
+			border:1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<canvas id='canvas'>
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		canvas.width = 800;
+		canvas.height = 800;
+
+		var context = canvas.getContext('2d');
+
+		context.beginPath();
+		context.fillStyle = 'grey';
+		context.fillRect(0,0,canvas.width,canvas.height);
+
+		context.save();
+		context.beginPath();
+		context.fillStyle = '#fff';
+		context.arc(400,400,100,0,Math.PI*2);
+		context.fill();
+		context.clip();
+
+		context.font = 'bold 100px Arial';
+		context.textAlign = 'center';
+		context.textBaseline = 'middle';
+		context.fillStyle = 'red';
+		context.fillText('CANVAS',400,400);
+	</script>
+</body>
+</html>

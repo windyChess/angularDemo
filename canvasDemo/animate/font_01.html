@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文字渲染</title>
+	<style>
+		#canvas{
+			border:1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas">
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		canvas.width = 800;
+		canvas.height = 800;
+
+		var context = canvas.getContext('2d');
+
+		context.font = 'bold 40px Arial';
+		context.fillStyle = '#058';
+		context.textAlign = 'left';
+		context.fillText('Hello World!',400,100);
+
+		context.strokeStyle = '#058';
+		context.textAlign = 'center';
+		context.strokeText('Hello World!',400,200);
+
+		var linearGrad = context.createLinearGradient(200,0,800,0);
+		linearGrad.addColorStop(0,'red');
+		linearGrad.addColorStop(0.25,'orange');
+		linearGrad.addColorStop(0.5,'green');
+		linearGrad.addColorStop(0.75,'yellow');
+		linearGrad.addColorStop(1,'blue');
+		context.fillStyle = linearGrad;
+		context.fillText('Hello World!',400,300);
+		context.strokeText('Hello World!',400,300);
+
+		var bgImg = new Image();
+		bgImg.src = '../img/cat.jpg';
+		bgImg.onload = function(){
+			var pattern = context.createPattern(bgImg,'repeat');
+			context.fillStyle = pattern;
+			context.textAlign = 'right';
+			context.fillText('Hello World!',400,400);
+			context.strokeText('Hello World!',400,400);
+		}
+	</script>
+</body>
+</html>
