@@ -7,22 +7,48 @@
 		#canvas{
 			border:1px solid #ddd;
 		}
+		.main{
+			border: 1px solid red;
+			position: relative;
+		}
+		.controller{
+			border: 1px solid blue;
+			position: absolute;
+			left:10px;
+			top:10px;
+			background:rgba(125,125,125,0.5);
+			color:white;
+			text-align: center;
+		}
+		.controller>a{
+			background-color: blue;
+			cursor:pointer;
+		}
+
 	</style>
 </head>
 <body>
-	<canvas id='canvas'>
-		当前浏览器不支持canvas，请更换浏览器后再试！
-	</canvas>
+	<div class='main'>
+		<canvas id='canvas'>
+			当前浏览器不支持canvas，请更换浏览器后再试！
+		</canvas>
+		<div id='controller' class='controller'>
+			<h3>BALLMOVE</h3>
+			<a id='move'>运动</a>
+			<a id='theme_a'>Theme A</a>
+			<a id='theme_b'>Theme B</a>
+		</div>
+	</div>
+	
 
 	<script>
 		var ball = null;
 		var balls = [];
+		var isMove = true;
 		window.onload = function(){
 			var canvas = document.getElementById('canvas');
 			canvas.width = 800;
 			canvas.height = 800;
-
-			
 
 			var context = canvas.getContext('2d');
 
@@ -44,8 +70,22 @@
 
 			setInterval(function(){
 				render(context);
-				update(canvas.width,canvas.height);
+				if(isMove){
+					update(canvas.width,canvas.height);
+				}
 			},50);
+
+			var moveBtn = document.getElementById('move');
+			moveBtn.onclick = function(){
+				var txt = this.innerText;
+				if(txt == '运动'){
+					isMove = false;
+					this.innerText = '停止';
+				}else{
+					isMove = true;
+					this.innerText = '运动';
+				}
+			}
 			
 		}
 

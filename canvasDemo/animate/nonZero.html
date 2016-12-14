@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>非零环绕原则</title>
+	<style>
+		#canvas{
+			border: 1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<canvas id='canvas'>
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		canvas.width = 800;
+		canvas.height = 800;
+
+		var context = canvas.getContext('2d');
+
+		context.fillStyle = 'green';
+		context.shadowColor = 'grey';
+		context.shadowOffsetX = 3;
+		context.shadowOffsetY = 3;
+		context.shadowBlur = 10;
+
+		context.moveTo(100,100);
+		context.lineTo(100,600);
+		context.lineTo(600,600);
+		context.lineTo(600,100);
+		context.lineTo(100,100);
+
+		context.moveTo(150,150);
+		context.lineTo(300,150);
+		context.lineTo(300,400);
+		context.lineTo(150,400);
+		context.lineTo(150,150);
+
+		context.arc(400,400,90,0,2*Math.PI);
+		context.fill();
+
+	</script>
+</body>
+</html>

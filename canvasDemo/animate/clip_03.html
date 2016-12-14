@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>剪切区</title>
+	<style>
+		#canvas{
+			border:1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<canvas id='canvas'>
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+	//该方法跟clip()没有任何关系，
+	//问题：在使用globalCompositeOperation时，
+	//在使用restore时会失效，
+	//一定要用定时器？？？
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			canvas.width = 800;
+			canvas.height = 800;
+
+			var context = canvas.getContext('2d');
+
+			context.beginPath();
+			context.fillStyle = 'rgba(125,125,125,0.9)';
+			context.fillRect(0,0,canvas.width,canvas.height);
+
+			//裁剪区
+			context.save();
+			context.globalCompositeOperation = 'xor';
+			context.fillStyle = '#fff';
+			context.beginPath();
+			context.arc(400,400,100,0,2*Math.PI);
+			context.fill();
+			// context.clip();
+
+
+			//添加图片
+			var img = new Image();
+			img.src = '../img/cat.jpg';
+
+			context.globalCompositeOperation = 'destination-over';
+			img.onload = function(){
+				context.drawImage(img,0,0);
+			}
+
+			// context.restore();
+			
+		}
+	</script>
+</body>
+</html>
