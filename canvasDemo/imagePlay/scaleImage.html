@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Image</title>
+	<style>
+		#canvas{
+			display: block;
+			border:1px solid #ddd;
+			margin:20px auto;
+		}
+		#scale{
+			display: block;
+			margin:20px auto;
+			width:60%;
+		}
+		#markCanvas{
+			border: 1px solid red;
+			display: block;
+			margin: 10px auto;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<canvas id='canvas'>
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+	<input type="range" id='scale' min='0.5' max='3.0' value='1.0' step='0.01'>
+
+	<canvas id='markCanvas'>
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+		var imgObj = new Image();
+		var slider = document.getElementById('scale');
+		var sW = 1152;
+		var sH = 768;
+
+		var markCanvas = document.getElementById('markCanvas');
+		markCanvas.width = 600;
+		markCanvas.height = 100;
+
+		var markContext = markCanvas.getContext('2d');
+		markContext.fillStyle = '#fff';
+		markContext.font = 'bold 40px Arial';
+		markContext.textAlign = 'center';
+		markContext.textBaseline = 'middle';
+
+		markContext.fillText('== @huangfq@ right==',300,50);
+
+		window.onload = function(){
+			canvas.width = 1152;
+			canvas.height = 768;
+
+			imgObj.src = '../img/img.jpg';
+			imgObj.onload = function(){
+				var scaleVal = slider.value;
+				drawImageByScale(scaleVal);
+
+				slider.onmousemove = function(){
+					scaleVal = slider.value;
+					drawImageByScale(scaleVal);
+				}
+
+			}
+		}
+
+		function drawImageByScale(scale){
+			var imgWidth = sW * scale;
+			var imgHeight = sH * scale;
+			var dx = canvas.width/2-imgWidth/2;
+			var dy = canvas.height/2-imgHeight/2;
+
+			context.clearRect(0,0,canvas.width,canvas.height);
+			context.drawImage(imgObj,dx,dy,imgWidth,imgHeight);
+			context.drawImage(markCanvas,canvas.width-markCanvas.width,
+								canvas.height-markCanvas.height);
+		}
+	</script>
+</body>
+</html>

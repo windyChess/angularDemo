@@ -35,8 +35,8 @@
 		<div id='controller' class='controller'>
 			<h3>BALLMOVE</h3>
 			<a id='move'>运动</a>
-			<a id='theme_a'>Theme A</a>
-			<a id='theme_b'>Theme B</a>
+			<a id='theme_a'>black</a> 
+			<a id='theme_b'>white</a>
 		</div>
 	</div>
 	
@@ -45,6 +45,7 @@
 		var ball = null;
 		var balls = [];
 		var isMove = true;
+		var themeType = 'white';
 		window.onload = function(){
 			var canvas = document.getElementById('canvas');
 			canvas.width = 800;
@@ -86,6 +87,16 @@
 					this.innerText = '运动';
 				}
 			}
+
+			var theme_a = document.getElementById('theme_a');
+			theme_a.onclick = function(){
+				themeType = 'black';
+			}
+
+			var theme_b = document.getElementById('theme_b');
+			theme_b.onclick = function(){
+				themeType = 'white';
+			}
 			
 		}
 
@@ -94,6 +105,12 @@
 		function render(cxt){
 			var cvs = cxt.canvas;
 			cxt.clearRect(0,0,cvs.width,cvs.height);
+
+			if(themeType == 'black'){
+				cxt.fillStyle = '#000';
+				cxt.fillRect(0,0,cvs.width,cvs.height);
+			}
+
 			for(var i=0;i<balls.length;i++){
 				cxt.beginPath();
 				cxt.fillStyle = 'rgb('+balls[i].r+','+balls[i].g+','+balls[i].b+')';
