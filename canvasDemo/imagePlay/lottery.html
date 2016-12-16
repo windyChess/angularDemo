@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>抽奖</title>
+	<style>
+		#canvas{
+			border: 1px solid #ddd;
+			display: block;
+			float:left;
+		}
+
+		.panel{
+			border: 1px solid red;
+			float:left;
+			margin-left:10px;
+			padding:10px 15px;
+		}
+		#operator{
+			display: block;
+			background: #058;
+			color:#fff;
+			font-size:20px;
+			text-align: center;
+			width: 100px;
+			padding:5px 20px;
+			border-radius: 5px;
+			cursor:pointer;
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas">
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<div id='controller' class='panel'>
+		<a id='operator' href="#">开始</a>
+	</div>
+	
+	<script src='../js/user.js'></script>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+		var operator = document.getElementById('operator');
+
+		var timer_head = null;
+
+		var sign = [
+				{'font':'1','size':20},
+				{'font':'2','size':20},
+				{'font':'3','size':20},
+				{'font':'GO','size':20}
+			];
+		var index = 0;
+		var img_i = 0;
+		var isFirst = true;//判断是否是第一次开始
+
+		window.onload = function(){
+			canvas.width = 800;
+			canvas.height = 800;
+
+			var operateVal = operator.innerText;
+			operator.onclick = function(){
+				operateVal = operator.innerText;
+				if(operateVal == '开始'){
+					operator.innerText = '停止';
+					//123GO -- 开始抽奖
+					if(isFirst){
+						startSign();
+					}else{
+						lottery();
+					}
+				}else{
+					operator.innerText = '开始';
+					if(timer_head){
+						clearInterval(timer_head);
+						showLucky();
+					}
+					if(timer){
+						clearInterval(timer);
+					}
+					
+				}
+			}
+
+		}
+
+		function startSign(){
+			context.fillStyle = 'red';
+			context.textAlign = 'center';
+			context.textBaseline = 'middle';
+
+			timer = setInterval(itemShow,50);
+		}
+
+		function itemShow(){
+			renderStart(sign[index]);
+			sign[index].size += 20;
+			if(sign[index].size == 400){
+				index++;
+			}
+			//如果index 等于sign.length时，停止定时器
+			if(index == sign.length){
+				isFirst = false;
+				clearInterval(timer);
+				lottery();
+			}
+		}
+
+		function renderStart(item){
+			context.clearRect(0,0,canvas.width,canvas.height);
+			context.font = 'bold ' + item.size + 'px Arial';
+			context.fillText(item.font,400,400);
+		}
+
+		function lottery(){
+			context.clearRect(0,0,canvas.width,canvas.height);
+
+			timer_head = setInterval(pollImg,20);
+		}
+
+		function pollImg(){
+			var imgObj = new Image();
+			imgObj.src = userData[img_i].head;
+			imgObj.onload = function(){
+				drawImg(imgObj,200,200);
+				img_i++;
+				if(img_i == userData.length){
+					img_i = 0;
+				}
+			}
+		}
+
+		function drawImg(img,imgW,imgH){
+			var dx = canvas.width/2 - imgW/2;
+			var dy = canvas.height/2 - imgH/2;
+
+			context.drawImage(img,dx,dy,imgW,imgH);
+		}
+
+		function showLucky(){
+			context.clearRect(0,0,canvas.width,canvas.height);
+			var luckImg = new Image();
+			luckImg.src = userData[img_i].head;
+			luckImg.onload = function(){
+				drawImg(luckImg,400,400);
+
+				context.fillStyle = '#058';
+				context.font = 'bold 70px Arial';
+				context.fillText(userData[img_i].user,400,700); 
+			}
+		}
+	</script>
+</body>
+</html>

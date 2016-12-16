@@ -1,0 +1,17 @@
+userData = [
+	{'user':'aisi','head':'../img/head/aisi.jpg'},
+	{'user':'buluke','head':'../img/head/buluke.jpg'},
+	{'user':'chang','head':'../img/head/chang.jpg'},
+	{'user':'changbizi','head':'../img/head/changbizi.jpg'},
+	{'user':'fan','head':'../img/head/fan.jpg'},
+	{'user':'gongzhu','head':'../img/head/gongzhu.jpg'},
+	{'user':'head','head':'../img/head/head.jpg'},
+	{'user':'jiqi','head':'../img/head/jiqi.jpg'},
+	{'user':'lufei','head':'../img/head/lufei.jpg'},
+	{'user':'namei','head':'../img/head/namei.jpg'},
+	{'user':'nvwang','head':'../img/head/nvwang.jpg'},
+	{'user':'qiaoba','head':'../img/head/qiaoba.jpg'},
+	{'user':'shanzhi','head':'../img/head/shanzhi.jpg'},
+	{'user':'zhi','head':'../img/head/zhi.jpg'},
+	{'user':'zhuoluo','head':'../img/head/zhuoluo.jpg'},
+];

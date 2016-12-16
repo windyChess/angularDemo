@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜</title>
+	<style>
+		#canvas{
+			border: 1px solid #ddd;
+		}
+	</style>
+</head>
+<body>
+	<canvas id='canvas'>
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
+	<script>
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+		var isMouseDown = false; //判断鼠标是否处于按住状态
+
+		window.onload = function(){
+			canvas.width = 1152;
+			canvas.height = 768;
+
+			var imgObj = new Image();
+			imgObj.src = '../img/img.jpg';
+			imgObj.onload = function(){
+				context.drawImage(imgObj,0,0);
+			}
+			//鼠标移出canvas时触发
+			canvas.addEventListener('mouseout',mouseOut);
+			//按下左键时触发
+			canvas.addEventListener('mousedown',mouseDown);
+			//松开鼠标左键时触发
+			canvas.addEventListener('mouseup',mouseUp);
+			//移动鼠标时触发
+			canvas.addEventListener('mousemove',mouseMove);
+		}
+		/*
+			按着和按着移动时，显示放大镜
+		*/
+		function mouseOut(e){
+			e.preventDefault();
+			console.log('---out---');
+			isMouseDown = false;
+		}
+
+		function mouseDown(e){
+			e.preventDefault();
+			// console.log('----down---');
+			var coordinate = windowToCanvas(e.clientX,e.clientY);
+			isMouseDown = true;
+		}
+
+		function mouseUp(e){
+			e.preventDefault();
+			console.log('-----up------');
+			isMouseDown = false;
+		}
+
+		function mouseMove(e){
+			e.preventDefault();
+			console.log('------move-------');
+		}
+
+		function windowToCanvas(x,y){
+			var eBox = canvas.getBoundingClientRect();
+			return {
+				x : x - eBox.left,
+				y : y - eBox.top
+			}
+		}
+
+	</script>
+</body>
+</html>
