@@ -5,7 +5,7 @@
 	<title>放大镜</title>
 	<style>
 		#canvas{
-			border: 1px solid #ddd;
+			border: 1px solid red;
 		}
 	</style>
 </head>
@@ -14,19 +14,33 @@
 		当前浏览器不支持canvas，请更换浏览器后再试！
 	</canvas>
 
+	<canvas id='offCanvas' style='display: none;'>
+		当前浏览器不支持canvas，请更换浏览器后再试！
+	</canvas>
+
 	<script>
 		var canvas = document.getElementById('canvas');
 		var context = canvas.getContext('2d');
 		var isMouseDown = false; //判断鼠标是否处于按住状态
 
+		var offCanvas = document.getElementById('offCanvas');
+		var offContext = offCanvas.getContext('2d');
+
+		var imgObj = new Image();
+		var scale = 1;
+
 		window.onload = function(){
 			canvas.width = 1152;
 			canvas.height = 768;
-
-			var imgObj = new Image();
-			imgObj.src = '../img/img.jpg';
+			
+			imgObj.src = '../img/img-lg.jpg';
 			imgObj.onload = function(){
-				context.drawImage(imgObj,0,0);
+				offCanvas.width = imgObj.width;
+				offCanvas.height = imgObj.height;
+				scale = offCanvas.width/canvas.width;
+
+				context.drawImage(imgObj,0,0,canvas.width,canvas.height);
+				offContext.drawImage(imgObj,0,0);
 			}
 			//鼠标移出canvas时触发
 			canvas.addEventListener('mouseout',mouseOut);
@@ -37,13 +51,42 @@
 			//移动鼠标时触发
 			canvas.addEventListener('mousemove',mouseMove);
 		}
+
+		//绘制放大镜
+		function execMagnifier(isExec,point){
+			context.clearRect(0,0,canvas.width,canvas.height);
+			context.drawImage(imgObj,0,0,canvas.width,canvas.height);
+
+			if(!isExec){
+				return;
+			}
+
+			var offR = 200;
+			var sx = point.x * scale - 200;
+			var sy = point.y * scale -200;
+			var dx = point.x - 200;
+			var dy = point.y - 200;
+
+			context.save();
+			context.lineWidth = 10;
+			context.strokeStyle = '#0077c0';
+			context.beginPath();
+			context.arc(point.x,point.y,offR,0,Math.PI*2);
+			context.stroke();
+			context.clip();
+
+			context.drawImage(offCanvas,sx,sy,offR*2,offR*2,dx,dy,offR*2,offR*2);
+			context.restore();
+
+		}
 		/*
-			按着和按着移动时，显示放大镜
+			按住左键和按住左键移动时，显示放大镜
 		*/
 		function mouseOut(e){
 			e.preventDefault();
-			console.log('---out---');
+			// console.log('---out---');
 			isMouseDown = false;
+			execMagnifier(false);
 		}
 
 		function mouseDown(e){
@@ -51,19 +94,26 @@
 			// console.log('----down---');
 			var coordinate = windowToCanvas(e.clientX,e.clientY);
 			isMouseDown = true;
+			execMagnifier(true,coordinate);
 		}
 
 		function mouseUp(e){
 			e.preventDefault();
-			console.log('-----up------');
+			// console.log('-----up------');
 			isMouseDown = false;
+			execMagnifier(false);
 		}
 
 		function mouseMove(e){
 			e.preventDefault();
-			console.log('------move-------');
+			// console.log('------move-------');
+			var coordinate = windowToCanvas(e.clientX,e.clientY);
+			if(isMouseDown){
+				execMagnifier(true,coordinate);
+			}
 		}
 
+		//计算鼠标按下时，相对于canvas的坐标
 		function windowToCanvas(x,y){
 			var eBox = canvas.getBoundingClientRect();
 			return {

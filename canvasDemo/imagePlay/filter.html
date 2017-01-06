@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.center{
+			text-align: center;
+		}
+		canvas{
+			border:1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<canvas id='canvasa'>当前浏览器不支持canvas，请更换后再试！</canvas>
+	<canvas id='canvasb'>当前浏览器不支持canvas，请更换后再试！</canvas>
+	<div class='center'><a href="javascript:filter()">filter</a></div>
+	<div class='center'><a href="javascript:grey()">灰色濾鏡</a></div>
+	<div class='center'><a href="javascript:blackWhite()">黑白濾鏡</a></div>
+	<div class='center'><a href="javascript:reverse()">反色濾鏡</a></div>
+	
+	<script>
+		var canvasa = document.getElementById('canvasa');
+		var canvasb = document.getElementById('canvasb');
+
+		canvasa.width = 500;
+		canvasa.height = 300;
+		canvasb.width = 500;
+		canvasb.height = 300;
+
+		var image = new Image();
+
+		var contexta = canvasa.getContext('2d');
+		var contextb = canvasb.getContext('2d');
+
+		image.src = 'img/autumn.jpg';
+		image.onload = function(){
+			contexta.drawImage(image,0,0,canvasa.width,canvasa.height);
+		}
+
+		function filter(){
+			var imageData = contexta.getImageData(0,0,canvasa.width,canvasa.height);
+			var pixelData = imageData.data;
+			console.log(imageData);
+			for(var i=0;i<canvasb.width*canvasb.height;i++){
+				pixelData[4*i] = 0;
+			}
+			contextb.putImageData(imageData,0,0,0,0,canvasb.width,canvasb.height);
+		}
+
+		//灰度濾鏡
+		function grey(){
+			var imageData = contexta.getImageData(0,0,canvasa.width,canvasa.height);
+			var pixelData = imageData.data;
+			console.log(imageData);
+			for(var i=0;i<canvasb.width*canvasb.height;i++){
+				var r = pixelData[4*i];
+				var g = pixelData[4*i+1];
+				var b = pixelData[4*i+2];
+
+				var grey = r*0.3 + g*0.59 + b*0.11;
+
+				pixelData[4*i] = grey;
+				pixelData[4*i+1] = grey;
+				pixelData[4*i+2] = grey;
+			}
+			contextb.putImageData(imageData,0,0,0,0,canvasb.width,canvasb.height);
+		}
+
+		//黑白濾鏡
+		function blackWhite(){
+			var imageData = contexta.getImageData(0,0,canvasa.width,canvasa.height);
+			var pixelData = imageData.data;
+			console.log(imageData);
+			var v = 0;
+			for(var i=0;i<canvasb.width*canvasb.height;i++){
+				var r = pixelData[4*i];
+				var g = pixelData[4*i+1];
+				var b = pixelData[4*i+2];
+
+				var grey = r*0.3 + g*0.59 + b*0.11;
+				if(grey > 255/2){
+					v = 255;
+				}else{
+					v = 0;
+				}
+
+				pixelData[4*i] = v;
+				pixelData[4*i+1] = v;
+				pixelData[4*i+2] = v;
+			}
+			contextb.putImageData(imageData,0,0,0,0,canvasb.width,canvasb.height);
+		}
+
+		//反色濾鏡
+		function reverse(){
+			var imageData = contexta.getImageData(0,0,canvasa.width,canvasa.height);
+			var pixelData = imageData.data;
+			console.log(imageData);
+			var v = 0;
+			for(var i=0;i<canvasb.width*canvasb.height;i++){
+				var r = pixelData[4*i];
+				var g = pixelData[4*i+1];
+				var b = pixelData[4*i+2];
+
+				pixelData[4*i] = 255 -r;
+				pixelData[4*i+1] = 255 - g;
+				pixelData[4*i+2] = 255 - b;
+			}
+			contextb.putImageData(imageData,0,0,0,0,canvasb.width,canvasb.height);
+		}
+
+		//模糊濾鏡
+		//......
+		//馬賽克濾鏡
+		//......
+	</script>
+</body>
+</body>
+</html>
