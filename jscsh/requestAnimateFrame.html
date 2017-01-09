@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>design  pattern</title>
+	<style>
+		#process{
+			width:1px;
+			height:20px;
+			background-color: green;
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id='process'>0%</div>
+	<button id='run'>run</button>
+	
+	<script>
+		var process = document.getElementById('process');
+		var run = document.getElementById('run');
+
+		var width = 0;
+		function step(){
+			width += 1;
+			process.style.width = width + '%';
+			process.innerHTML = width + '%';
+			if(width < 100){
+				window.requestAnimationFrame(step);
+			} 
+		}
+		// window.requestAnimationFrame(step);
+		// step();
+
+		run.addEventListener('click',function(){
+			window.requestAnimationFrame(step);
+		});
+	</script>
+</body>
+</html>

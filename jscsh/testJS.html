@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>作为值的函数</title>
+</head>
+<body>
+	
+	<script>
+		'use strict';
+		function callFunction(fn,arg){
+			return fn(arg);
+		}
+
+		function sum(arg){
+			return arg + 100;
+		}
+
+		var result = callFunction(sum,200);
+		// console.log(result);
+
+		//arguments & callee
+		function factorial(num){
+			if(num <= 1){
+				return 1;
+			}else{
+				// return num * factorial(num - 1);
+				//arguments.callee 指向拥有arguments对象的函数
+				return num * arguments.callee(num - 1);
+			}
+		}
+
+		// var factResult = factorial(6);
+		var test = factorial;
+		factorial = null;
+		// console.log(test(6));
+
+		//apply & call
+		var color = 'red';
+		var obj = {
+			color : 'blue'
+		};
+		function nowColor(){
+			return this.color;
+		}
+
+		console.log(nowColor.apply(obj));
+		console.log(nowColor.call(this));
+
+	</script>
+</body>
+</html>

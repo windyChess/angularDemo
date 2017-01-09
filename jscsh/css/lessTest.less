@@ -1,0 +1,77 @@
+@charset 'utf-8';
+
+//变量声明
+@test_w:300px;
+@test_h:200px;
+@b_mg:10px;
+
+.box-1{
+	.size;
+	.bg;
+	.border(5px);
+}
+.box-2{
+	.size;
+	.bg;
+	.border(10px);
+	margin-top:@b_mg;
+}
+.box-3{
+	.size;
+	.bg;
+	.border_01();
+	margin-top:@b_mg;
+}
+//混合(mixin) :  将以下的类名添加到需要用到的元素中，如上一行中的'.bg;'
+.size{
+	width:@test_w;
+	height:@test_h;
+}
+.bg{
+	background-color: pink;
+}
+//混合带参数的
+.border(@bd_w){
+	border:@bd_w solid yellow;
+}
+//混合带参数(参数带默认值)
+.border_01(@bd_w:30px){
+	border:@bd_w solid yellow;
+}
+
+//匹配模式
+.triangle(top,@borderW:10px,@color:green){
+	border-color:transparent transparent @color transparent;
+	border-style: solid;
+	border-width: @borderW;
+}
+.triangle(bottom,@borderW:10px,@color:green){
+	border-color:@color transparent transparent transparent;
+	border-style: solid;
+	border-width: @borderW;
+}
+.triangle(left,@borderW:10px,@color:green){
+	border-color:transparent @color transparent transparent;
+	border-style: solid;
+	border-width: @borderW;
+}
+.triangle(right,@borderW:10px,@color:green){
+	border-color:transparent transparent transparent @color;
+	border-style: solid;
+	border-width: @borderW;
+}
+.triangle(@_,@borderW:10px,@color:green){
+	width:0px;
+	height:0px;
+}
+
+.test{
+	.triangle(top);
+}
+
+//运算
+@box_w:300px;
+.box-4{
+	width:@box_w + 20;
+	background-color:#ccc+10;
+}
